@@ -1,8 +1,10 @@
 package com.example.attractions.ui.home.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.attractions.databinding.ItemAttractionCountBinding
 import com.example.attractions.databinding.ItemHeaderBinding
 
 class AttractionCountAdapter : RecyclerView.Adapter<AttractionCountAdapter.ViewHolder>() {
@@ -15,7 +17,7 @@ class AttractionCountAdapter : RecyclerView.Adapter<AttractionCountAdapter.ViewH
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemHeaderBinding.inflate(
+            ItemAttractionCountBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -30,10 +32,11 @@ class AttractionCountAdapter : RecyclerView.Adapter<AttractionCountAdapter.ViewH
     override fun getItemCount(): Int = 1
 
     class ViewHolder(
-        private val binding: ItemHeaderBinding
+        private val binding: ItemAttractionCountBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(count: Int) {
-            binding.headerTitle.text = "台北共有 $count 個景點"
+            binding.attractionCount.text = "台北共有 $count 個景點"
         }
     }
 } 

@@ -2,9 +2,11 @@ package com.example.attractions.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.attractions.databinding.ItemAttractionBinding
 import com.example.attractions.model.attraction.RespAttractionsAll
 
@@ -29,7 +31,14 @@ class AttractionsAdapter : PagingDataAdapter<RespAttractionsAll.Attraction, Attr
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(attraction: RespAttractionsAll.Attraction) {
             binding.name.text = attraction.name
-            // TODO: 設置其他景點相關資訊
+            binding.image.isVisible = attraction.images.isNotEmpty()
+            if (attraction.images.isNotEmpty()) {
+                Glide.with(binding.image)
+                    .load(attraction.images[0].src)
+                    .centerCrop()
+                    .into(binding.image)
+            }
+            binding.introduction.text = attraction.introduction
         }
     }
 

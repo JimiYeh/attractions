@@ -29,7 +29,7 @@ class EventsAdapter : PagingDataAdapter<RespEventsNews.Event, EventsAdapter.View
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(event: RespEventsNews.Event) {
             binding.title.text = event.title
-            // TODO: 設置其他事件相關資訊
+            binding.description.text = event.description
         }
     }
 
