@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace 'com.example.attractions'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.example.attractions"
@@ -30,6 +30,23 @@ android {
     kotlinOptions {
         jvmTarget = '17'
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    flavorDimensions "version"
+    productFlavors {
+        dev {
+            dimension "version"
+            buildConfigField "String", "HOST", "\"https://www.travel.taipei/open-api\""
+        }
+        prod {
+            dimension "version"
+            // 有需要的話這邊可以設定不同的 HOST
+            buildConfigField "String", "HOST", "\"https://www.travel.taipei/open-api\""
+        }
+    }
 }
 
 dependencies {
@@ -53,7 +70,6 @@ dependencies {
 
     // Koin
     implementation libs.koin.android
-    implementation libs.koin.androidx.viewmodel
 
     // Paging 3
     implementation libs.androidx.paging.runtime

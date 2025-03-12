@@ -28,7 +28,6 @@ androidx-lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
-koin-androidx-viewmodel = { group = "io.insert-koin", name = "koin-androidx-viewmodel", version.ref = "koin" }
 # Paging 3
 androidx-paging-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
 
