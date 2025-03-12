@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.3" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_right"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/bg_attraction_name"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:paddingVertical="6dp"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/arrow"
+        app:layout_constraintStart_toEndOf="@id/image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginStart="0dp"
+        tools:text="竹柏參道" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/introduction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="4"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/arrow"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        tools:text="位於臺北市文山區，除了聞名的指南宮外，還有一條低調卻令人流連忘返的步道「竹柏參道」。這條步道沿途被竹柏林包圍，綠蔭遮天，環境靜謐幽深，不僅是登山健行的好選擇，也是一處遠離都市喧囂的世外桃源。\r\n竹柏參道的名稱來自於兩側茂密生長的「竹柏」，這是一種常綠喬木，葉片細長如竹，卻帶有柏樹的特性，因此得名。沿途樹影搖曳，四季常青，無論是晨間的陽光灑落還是雨後的霧氣繚繞，都為步道增添了一份詩意與靜謐氛圍。\r\n\r\n步道沿途可見一些歷史遺跡，如石燈籠與古老的石亭，見證了這條道路百年來的變遷。參道鋪設平整，坡度適中，適合各個年齡層的遊客步行，步道中段有幾處休憩平台，可供遊客短暫休憩，靜靜感受山林間的蟲鳴鳥叫。\r\n\r\n參道兩側設置夜間光環境，以柔和、自然的燈光設計營造寧靜且富有禪意的氛圍，兼顧行走安全與視覺美感，使夜間步行更具沉浸感與儀式感。\r\n\r\n竹柏參道一年四季皆適合造訪，夏季有濃密樹蔭遮擋烈日，冬季則少見寒風刺骨的情況。步道沿線無商家，建議攜帶足夠的飲水與輕食補給。若計畫長距離健行，可搭配指南宮或貓空的茶館作為終點，品味當地特色茶點，為旅程畫下完美句點。" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
