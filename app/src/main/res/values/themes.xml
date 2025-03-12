@@ -26,4 +26,20 @@
     <style name="ThemeOverlay.Attractions.Toolbar" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
         <item name="colorControlNormal">@color/white</item>
     </style>
+
+    <!-- 自定義對話框樣式 -->
+    <style name="CustomAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <!-- 移除圓角 -->
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.NoCorners</item>
+        <!-- 設定列表項目樣式 -->
+        <item name="materialAlertDialogBodyTextStyle">@style/DialogBodyText</item>
+    </style>
+
+    <style name="ShapeAppearance.NoCorners" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerSize">0dp</item>
+    </style>
+
+    <style name="DialogBodyText" parent="MaterialAlertDialog.Material3.Body.Text">
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>
