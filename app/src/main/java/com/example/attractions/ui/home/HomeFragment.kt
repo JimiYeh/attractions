@@ -13,11 +13,11 @@ import com.example.attractions.ui.home.adapter.EventsAdapter
 import com.example.attractions.ui.home.adapter.HeaderAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    private val viewModel: HomeViewModel by viewModel()
+    private val viewModel: HomeViewModel by activityViewModel()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 

@@ -13,13 +13,16 @@ import com.example.attractions.databinding.ActivityMainBinding
 import com.example.attractions.model.Language
 import com.example.attractions.repository.network.interceptor.LanguageInterceptor
 import com.example.attractions.ui.home.HomeFragment
+import com.example.attractions.ui.home.HomeViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     
     private lateinit var binding: ActivityMainBinding
     private val languageInterceptor: LanguageInterceptor by inject()
+    private val homeViewModel: HomeViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,6 +93,7 @@ class MainActivity : AppCompatActivity() {
                 val selectedLanguage = languages[which]
                 if (selectedLanguage != currentLanguage) {
                     languageInterceptor.language = selectedLanguage.code
+                    homeViewModel.refresh()
                     dialog.dismiss()
                     recreate()
                 }
