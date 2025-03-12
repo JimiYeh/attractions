@@ -8,15 +8,15 @@ class LanguageInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
-
         val originalUrl = originalRequest.url()
         
-        // 構建新的 URL，替換 {lang} 佔位符
+        // 使用已編碼的佔位符進行替換
         val newUrl = originalUrl.newBuilder()
-            .encodedPath(originalUrl.encodedPath().replace("{lang}", language))
+            .encodedPath(originalUrl.encodedPath()
+                .replace("%7Blang%7D", language)  // 替換編碼後的佔位符
+                .replace("{lang}", language))     // 以防萬一也替換未編碼的佔位符
             .build()
         
-        // 創建新的請求
         val newRequest = originalRequest.newBuilder()
             .url(newUrl)
             .build()

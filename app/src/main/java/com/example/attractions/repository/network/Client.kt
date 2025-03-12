@@ -21,7 +21,7 @@ class Client(languageInterceptor: LanguageInterceptor) {
             .addInterceptor {
                 val requestBuilder: Request.Builder =
                     it.request().newBuilder()
-                        .addHeader("Content-Type", "application/json")
+                        .addHeader("accept", "application/json")
                         .url(it.request().url())
 
                 it.proceed((requestBuilder.build()))
