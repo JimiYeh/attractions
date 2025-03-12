@@ -6,6 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface AttractionService {
-    @GET("/{lang}/Attractions/All")
+    @GET("/open-api/{lang}/Attractions/All")
     suspend fun getAllAttractions(@Query("page") page: Int): NetworkResponse<RespAttractionsAll>
 }

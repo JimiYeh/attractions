@@ -40,12 +40,11 @@ android {
     productFlavors {
         dev {
             dimension "version"
-            buildConfigField "String", "HOST", "\"https://www.travel.taipei/open-api\""
+            buildConfigField "String", "HOST", "\"https://www.travel.taipei/\""
         }
         prod {
             dimension "version"
-            // 有需要的話這邊可以設定不同的 HOST
-            buildConfigField "String", "HOST", "\"https://www.travel.taipei/open-api\""
+            buildConfigField "String", "HOST", "\"https://www.travel.taipei/\""
         }
     }
 }

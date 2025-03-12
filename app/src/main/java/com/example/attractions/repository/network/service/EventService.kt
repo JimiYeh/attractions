@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface EventService {
 
-    @GET("/{lang}/Events/News")
+    @GET("/open-api/{lang}/Events/News")
     suspend fun getNewsEvents(
         @Query("begin") begin: String,
         @Query("end") end: String,
