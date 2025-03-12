@@ -12,6 +12,7 @@ import com.example.attractions.R
 import com.example.attractions.databinding.ActivityMainBinding
 import com.example.attractions.model.Language
 import com.example.attractions.repository.network.interceptor.LanguageInterceptor
+import com.example.attractions.ui.home.HomeFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.android.ext.android.inject
 
