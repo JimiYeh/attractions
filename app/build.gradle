@@ -42,4 +42,19 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
+
+    // ViewModel 和 LiveData
+    implementation libs.androidx.lifecycle.viewmodel
+    implementation libs.androidx.lifecycle.livedata
+
+    // Retrofit
+    implementation libs.retrofit.core
+    implementation libs.retrofit.converter.gson
+
+    // Koin
+    implementation libs.koin.android
+    implementation libs.koin.androidx.viewmodel
+
+    // Paging 3
+    implementation libs.androidx.paging.runtime
 }
