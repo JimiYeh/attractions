@@ -1,9 +1,29 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Attractions" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.Attractions" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
+        <!-- Toolbar 樣式 -->
+        <item name="toolbarStyle">@style/Widget.Attractions.Toolbar</item>
     </style>
 
     <style name="Theme.Attractions" parent="Base.Theme.Attractions" />
+
+    <!-- 自定義 Toolbar 樣式 -->
+    <style name="Widget.Attractions.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">@color/primary</item>
+        <item name="titleTextColor">@color/white</item>
+        <item name="android:theme">@style/ThemeOverlay.Attractions.Toolbar</item>
+    </style>
+
+    <!-- Toolbar 主題覆蓋 -->
+    <style name="ThemeOverlay.Attractions.Toolbar" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+        <item name="colorControlNormal">@color/white</item>
+    </style>
 </resources>
