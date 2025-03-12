@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName
 
 data class RespEventsNews(
     @SerializedName("data")
-    val `data`: List<Data> = listOf(),
+    val events: List<Event> = listOf(),
     @SerializedName("total")
     val total: Int = 0
 ) {
-    data class Data(
+    data class Event(
         @SerializedName("begin")
         val begin: Any = Any(),
         @SerializedName("description")

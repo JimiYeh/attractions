@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName
 
 data class RespAttractionsAll(
     @SerializedName("data")
-    val data: List<Data> = listOf(),
+    val attractions: List<Attraction> = listOf(),
     @SerializedName("total")
     val total: Int = 0
 ) {
-    data class Data(
+    data class Attraction(
         @SerializedName("address")
         val address: String = "",
         @SerializedName("category")
@@ -31,7 +31,7 @@ data class RespAttractionsAll(
         @SerializedName("id")
         val id: Int = 0,
         @SerializedName("images")
-        val images: List<Any> = listOf(),
+        val images: List<Image> = listOf(),
         @SerializedName("introduction")
         val introduction: String = "",
         @SerializedName("links")
@@ -81,6 +81,14 @@ data class RespAttractionsAll(
             val id: Int = 0,
             @SerializedName("name")
             val name: String = ""
+        )
+        data class Image(
+            @SerializedName("src")
+            val src: String = "",
+            @SerializedName("subject")
+            val subject: String = "",
+            @SerializedName("ext")
+            val ext: String = ""
         )
     }
 }
