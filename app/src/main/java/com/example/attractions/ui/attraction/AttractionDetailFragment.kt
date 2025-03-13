@@ -91,6 +91,17 @@ class AttractionDetailFragment : Fragment(R.layout.fragment_attraction_detail) {
                 text = attraction.officialSite.takeIf { it.isNotEmpty() }?.let { 
                     String.format(getString(R.string.official_site_info), it)
                 }
+                setOnClickListener {
+                    if (attraction.officialSite.isNotEmpty()) {
+                        parentFragmentManager.beginTransaction()
+                            .replace(
+                                R.id.fragment_container,
+                                AttractionOfficialSiteFragment.newInstance(attraction.officialSite)
+                            )
+                            .addToBackStack(null)
+                            .commit()
+                    }
+                }
             }
 
             introduction.text = attraction.introduction
