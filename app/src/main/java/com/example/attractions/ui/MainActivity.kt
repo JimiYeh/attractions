@@ -37,11 +37,13 @@ class MainActivity : AppCompatActivity() {
             updateToolbar()
         }
 
-        // 如果是首次創建,添加 HomeFragment
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .add(R.id.fragment_container, HomeFragment())
                 .commit()
+        } else {
+            // 恢復時更新 Toolbar 狀態
+            updateToolbar()
         }
     }
 
