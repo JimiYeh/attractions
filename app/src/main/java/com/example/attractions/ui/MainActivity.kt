@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.attractions.R
 import com.example.attractions.databinding.ActivityMainBinding
+import com.example.attractions.manager.SharePreferenceManager
 import com.example.attractions.model.Language
 import com.example.attractions.repository.network.interceptor.LanguageInterceptor
 import com.example.attractions.ui.home.HomeFragment
@@ -17,6 +18,7 @@ import com.example.attractions.ui.home.HomeViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     
@@ -25,6 +27,10 @@ class MainActivity : AppCompatActivity() {
     private val homeViewModel: HomeViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // 在 super.onCreate 之前先載入語言設定
+        updateLocale(SharePreferenceManager.language)
+        languageInterceptor.language = SharePreferenceManager.language
+        
         super.onCreate(savedInstanceState)
         
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -55,7 +61,7 @@ class MainActivity : AppCompatActivity() {
             // 設置返回按鈕圖標
             setHomeAsUpIndicator(R.drawable.ic_arrow_back)
         }
-        invalidateOptionsMenu() // 重新創建選項菜單
+        invalidateOptionsMenu()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -82,7 +88,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showLanguageDialog() {
         val languages = Language.entries.toTypedArray()
-        val currentLanguage = Language.fromCode(languageInterceptor.language) ?: Language.CHINESE_TRADITIONAL
+        val currentLanguage = Language.fromCode(languageInterceptor.language) ?: Language.default
         
         val adapter = object : ArrayAdapter<Language>(
             this,
@@ -117,13 +123,29 @@ class MainActivity : AppCompatActivity() {
             .setAdapter(adapter) { dialog, which ->
                 val selectedLanguage = languages[which]
                 if (selectedLanguage != currentLanguage) {
+                    // 更新 API 請求的語言設定
                     languageInterceptor.language = selectedLanguage.code
+                    SharePreferenceManager.language = selectedLanguage.code
+                    updateLocale(selectedLanguage.code)
+                    
+                    // 重新加載數據
                     homeViewModel.refresh()
+                    
                     dialog.dismiss()
+                    // 重新啟動 Activity
                     recreate()
                 }
             }
             .show()
+    }
+
+    private fun updateLocale(languageCode: String) {
+        val locale = Language.fromCode(languageCode)?.locale ?: Language.default.locale
+        
+        Locale.setDefault(locale)
+        val config = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
     }
 
     // 設置標題

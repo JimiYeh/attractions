@@ -98,4 +98,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onDestroyView()
         _binding = null
     }
+
+    override fun onResume() {
+        super.onResume()
+        // 更新首頁標題
+        (requireActivity() as MainActivity).setToolbarTitle(getString(R.string.title_home))
+    }
 }
