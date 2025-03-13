@@ -2,6 +2,7 @@ package com.example.attractions.ui.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
@@ -77,6 +78,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun observeViewModel() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.isLoading.collect { isLoading ->
+                binding.loadingView.root.isVisible = isLoading
+            }
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.events.collectLatest { pagingData ->
                 eventsAdapter.submitData(pagingData)

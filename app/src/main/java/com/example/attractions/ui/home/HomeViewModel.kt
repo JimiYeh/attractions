@@ -14,6 +14,8 @@ import com.example.attractions.repository.IRepository
 import com.example.attractions.repository.NetworkResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -30,6 +32,9 @@ class HomeViewModel(
 
     // 修改為 StateFlow，確保有初始值
     private val refreshTrigger = MutableStateFlow(0)
+
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
     // 活動列表
     val events: Flow<PagingData<RespEventsNews.Event>> = refreshTrigger.flatMapLatest {
@@ -74,12 +79,14 @@ class HomeViewModel(
 
     private fun loadAttractionsCount() {
         viewModelScope.launch {
+            _isLoading.value = true
             val response = repository.getAllAttractions(1)
             if (response.isSuccess) {
                 _attractionsCount.value = (response as NetworkResponse.Success).data.total
             } else {
                 _attractionsCount.value = 0
             }
+            _isLoading.value = false
         }
     }
 }
