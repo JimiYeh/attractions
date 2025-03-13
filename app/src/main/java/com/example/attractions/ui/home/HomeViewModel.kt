@@ -77,6 +77,8 @@ class HomeViewModel(
             val response = repository.getAllAttractions(1)
             if (response.isSuccess) {
                 _attractionsCount.value = (response as NetworkResponse.Success).data.total
+            } else {
+                _attractionsCount.value = 0
             }
         }
     }
