@@ -32,6 +32,11 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
+        // 監聽 Fragment 的變化
+        supportFragmentManager.addOnBackStackChangedListener {
+            updateToolbar()
+        }
+
         // 如果是首次創建,添加 HomeFragment
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
@@ -40,13 +45,31 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateToolbar() {
+        val isHome = supportFragmentManager.backStackEntryCount == 0
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(!isHome)
+            setHomeButtonEnabled(!isHome)
+            // 設置返回按鈕圖標
+            setHomeAsUpIndicator(R.drawable.ic_arrow_back)
+        }
+        invalidateOptionsMenu() // 重新創建選項菜單
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+        // 只在首頁顯示語言切換按鈕
+        menu.findItem(R.id.action_language)?.isVisible = 
+            supportFragmentManager.backStackEntryCount == 0
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
             R.id.action_language -> {
                 showLanguageDialog()
                 true
@@ -99,5 +122,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             .show()
+    }
+
+    // 設置標題
+    fun setToolbarTitle(title: String) {
+        supportActionBar?.title = title
     }
 }

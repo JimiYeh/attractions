@@ -7,6 +7,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import com.example.attractions.R
 import com.example.attractions.databinding.FragmentHomeBinding
+import com.example.attractions.ui.MainActivity
+import com.example.attractions.ui.attraction.AttractionDetailFragment
+import com.example.attractions.ui.event.EventFragment
 import com.example.attractions.ui.home.adapter.AttractionCountAdapter
 import com.example.attractions.ui.home.adapter.AttractionsAdapter
 import com.example.attractions.ui.home.adapter.EventsAdapter
@@ -21,21 +24,49 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val attractionCountAdapter = AttractionCountAdapter()
-    private val eventsHeaderAdapter = HeaderAdapter("最新消息")
-    private val eventsAdapter = EventsAdapter()
-    private val attractionsHeaderAdapter = HeaderAdapter("遊憩景點")
-    private val attractionsAdapter = AttractionsAdapter()
+    private val attractionCountAdapter by lazy { AttractionCountAdapter() }
+    private val eventsHeaderAdapter by lazy { HeaderAdapter(getString(R.string.news_event)) }
+    private val eventsAdapter by lazy {
+        EventsAdapter(
+            onClick = { event ->
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, EventFragment.newInstance(event))
+                    .addToBackStack(null)
+                    .commit()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+            }
+        )
+    }
+    private val attractionsHeaderAdapter by lazy { HeaderAdapter(getString(R.string.attraction)) }
+    private val attractionsAdapter by lazy {
+        AttractionsAdapter(
+            onClick = { attraction ->
+                parentFragmentManager.beginTransaction()
+                    .replace(
+                        R.id.fragment_container,
+                        AttractionDetailFragment.newInstance(attraction)
+                    )
+                    .addToBackStack(null)
+                    .commit()
+            }
+        )
+    }
+
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentHomeBinding.bind(view)
 
-        setupRecyclerView()
+        // 恢復首頁標題
+        (requireActivity() as MainActivity).setToolbarTitle(getString(R.string.title_home))
+
+        initViews()
         observeViewModel()
     }
 
-    private fun setupRecyclerView() {
+    private fun initViews() {
         binding.recyclerView.adapter = ConcatAdapter(
             attractionCountAdapter,
             eventsHeaderAdapter,

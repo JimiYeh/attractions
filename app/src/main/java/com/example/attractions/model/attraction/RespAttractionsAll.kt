@@ -2,13 +2,14 @@ package com.example.attractions.model.attraction
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class RespAttractionsAll(
     @SerializedName("data")
     val attractions: List<Attraction> = listOf(),
     @SerializedName("total")
     val total: Int = 0
-) {
+) : Serializable {
     data class Attraction(
         @SerializedName("address")
         val address: String = "",
@@ -68,20 +69,21 @@ data class RespAttractionsAll(
         val url: String = "",
         @SerializedName("zipcode")
         val zipcode: String = ""
-    ) {
+    ) : Serializable {
         data class Category(
             @SerializedName("id")
             val id: Int = 0,
             @SerializedName("name")
             val name: String = ""
-        )
+        ) : Serializable
 
         data class Target(
             @SerializedName("id")
             val id: Int = 0,
             @SerializedName("name")
             val name: String = ""
-        )
+        ) : Serializable
+
         data class Image(
             @SerializedName("src")
             val src: String = "",
@@ -89,6 +91,6 @@ data class RespAttractionsAll(
             val subject: String = "",
             @SerializedName("ext")
             val ext: String = ""
-        )
+        ) : Serializable
     }
 }

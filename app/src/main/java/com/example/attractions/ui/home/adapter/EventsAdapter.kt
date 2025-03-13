@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.attractions.databinding.ItemNewsEventBinding
 import com.example.attractions.model.event.RespEventsNews
 
-class EventsAdapter : PagingDataAdapter<RespEventsNews.Event, EventsAdapter.ViewHolder>(COMPARATOR) {
+class EventsAdapter(private val onClick: (RespEventsNews.Event) -> Unit) : PagingDataAdapter<RespEventsNews.Event, EventsAdapter.ViewHolder>(COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -16,7 +16,8 @@ class EventsAdapter : PagingDataAdapter<RespEventsNews.Event, EventsAdapter.View
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            onClick
         )
     }
 
@@ -25,9 +26,13 @@ class EventsAdapter : PagingDataAdapter<RespEventsNews.Event, EventsAdapter.View
     }
 
     class ViewHolder(
-        private val binding: ItemNewsEventBinding
+        private val binding: ItemNewsEventBinding,
+        private val onClick: (RespEventsNews.Event) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(event: RespEventsNews.Event) {
+            binding.root.setOnClickListener {
+                onClick(event)
+            }
             binding.title.text = event.title
             binding.description.text = event.description
         }

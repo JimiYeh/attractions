@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.attractions.databinding.ItemAttractionBinding
 import com.example.attractions.model.attraction.RespAttractionsAll
 
-class AttractionsAdapter : PagingDataAdapter<RespAttractionsAll.Attraction, AttractionsAdapter.ViewHolder>(COMPARATOR) {
+class AttractionsAdapter(private val onClick: (RespAttractionsAll.Attraction) -> Unit) : PagingDataAdapter<RespAttractionsAll.Attraction, AttractionsAdapter.ViewHolder>(COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -18,7 +18,8 @@ class AttractionsAdapter : PagingDataAdapter<RespAttractionsAll.Attraction, Attr
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            onClick
         )
     }
 
@@ -27,9 +28,13 @@ class AttractionsAdapter : PagingDataAdapter<RespAttractionsAll.Attraction, Attr
     }
 
     class ViewHolder(
-        private val binding: ItemAttractionBinding
+        private val binding: ItemAttractionBinding,
+        private val onClick: (RespAttractionsAll.Attraction) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(attraction: RespAttractionsAll.Attraction) {
+            binding.root.setOnClickListener {
+                onClick(attraction)
+            }
             binding.name.text = attraction.name
             binding.image.isVisible = attraction.images.isNotEmpty()
             if (attraction.images.isNotEmpty()) {

@@ -15,4 +15,7 @@
     <string name="language_id" translatable="false">Bahasa Indonesia</string>
     <string name="language_th" translatable="false">ภาษาไทย</string>
     <string name="language_vi" translatable="false">Tiếng Việt</string>
+
+    <string name="news_event">最新消息</string>
+    <string name="attraction">遊憩景點</string>
 </resources>
