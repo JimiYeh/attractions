@@ -1,5 +1,8 @@
 package com.example.attractions.ui.attraction
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -75,6 +78,24 @@ class AttractionDetailFragment : Fragment(R.layout.fragment_attraction_detail) {
                 text = attraction.address.takeIf { it.isNotEmpty() }?.let { 
                     String.format(getString(R.string.address_info), it)
                 }
+                setOnClickListener {
+                    if (attraction.address.isNotEmpty()) {
+                        // 使用 Google Maps 打開地址
+                        val uri = Uri.parse("geo:0,0?q=${Uri.encode(attraction.address)}")
+                        val mapIntent = Intent(Intent.ACTION_VIEW, uri).apply {
+                            setPackage("com.google.android.apps.maps")
+                        }
+                        
+                        try {
+                            startActivity(mapIntent)
+                        } catch (e: ActivityNotFoundException) {
+                            // 如果沒有安裝 Google Maps，則使用瀏覽器打開
+                            val browserUri = Uri.parse("https://www.google.com/maps/search/?api=1&query=${Uri.encode(attraction.address)}")
+                            val browserIntent = Intent(Intent.ACTION_VIEW, browserUri)
+                            startActivity(browserIntent)
+                        }
+                    }
+                }
             }
 
             // 電話
@@ -82,6 +103,15 @@ class AttractionDetailFragment : Fragment(R.layout.fragment_attraction_detail) {
                 isVisible = attraction.tel.isNotEmpty()
                 text = attraction.tel.takeIf { it.isNotEmpty() }?.let { 
                     String.format(getString(R.string.tel_info), it)
+                }
+                setOnClickListener {
+                    if (attraction.tel.isNotEmpty()) {
+                        // 撥打電話
+                        val intent = Intent(Intent.ACTION_DIAL).apply {
+                            data = Uri.parse("tel:${attraction.tel}")
+                        }
+                        startActivity(intent)
+                    }
                 }
             }
 
