@@ -31,10 +31,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         EventsAdapter(
             onClick = { event ->
                 parentFragmentManager.beginTransaction()
+                    .setCustomAnimations(
+                        R.anim.slide_in_right,
+                        R.anim.slide_out_left,
+                        R.anim.slide_in_left,
+                        R.anim.slide_out_right
+                    )
                     .replace(R.id.fragment_container, EventFragment.newInstance(event))
                     .addToBackStack(null)
                     .commit()
-
             }
         )
     }
@@ -43,10 +48,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         AttractionsAdapter(
             onClick = { attraction ->
                 parentFragmentManager.beginTransaction()
-                    .replace(
-                        R.id.fragment_container,
-                        AttractionDetailFragment.newInstance(attraction)
+                    .setCustomAnimations(
+                        R.anim.slide_in_right,
+                        R.anim.slide_out_left,
+                        R.anim.slide_in_left,
+                        R.anim.slide_out_right
                     )
+                    .replace(R.id.fragment_container, AttractionDetailFragment.newInstance(attraction))
                     .addToBackStack(null)
                     .commit()
             }
